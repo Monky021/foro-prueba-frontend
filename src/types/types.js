@@ -11,6 +11,15 @@ export const types = {
 
     preguntasCargar: '[preguntas] Cargar preguntas',
     PreguntasCargadas: '[preguntas] Poner las preguntas en el store',
+    PreguntasCargadasDeportes: '[preguntas] Poner las preguntas en el store',
+    PreguntasCargadasFotografia: '[preguntas] Poner las preguntas en el store',
+    PreguntasCargadasTecnologia: '[preguntas] Poner las preguntas en el store',
+    PreguntasCargadasCriptomoneda: '[preguntas] Poner las preguntas en el store',
+    PreguntasCargadasNode: '[preguntas] Poner las preguntas en el store',
+    PreguntasCargadasReact: '[preguntas] Poner las preguntas en el store',
+    PreguntasCargadasRandom: '[preguntas] Poner las preguntas en el store',
+
+
     hacerPregunta: '[preguntas] postear preguntas' ,
     añadirNuevaPregunta: '[Preguntas] añade una nueva pregunta al store',
     preguntaActiva: '[pregunta] poner pregunta activa',
@@ -31,9 +40,10 @@ export const types = {
     modalCerradoPreguntas: '[ui] el modal se cierra y pone en false las preuntas',
     modalAbiertoEditarPregunta: '[ui] el modal se abre para editar pregunta',
     modalAbiertoEliminarPregunta: '[ui] el modal se abre para confirmar la eliminacion de la pregunta',
-    modalCerradoEliminarPregunta: '[ui] cambia el estado de eliminar en el store'
+    modalCerradoEliminarPregunta: '[ui] cambia el estado de eliminar en el store',
 
-
+    cargarTematicas: '[tematicas] cargar las tematicas',
+    cargarTematicasStore: '[tematica] cargar tematicas store'
 
 
 

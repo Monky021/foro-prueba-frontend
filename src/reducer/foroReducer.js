@@ -2,6 +2,14 @@ import { types } from "../types/types";
 
 const initialState = {
     preguntas: [],
+    tematicas: [],
+    preguntasDe:[],
+    preguntasFoto:[],
+    preguntasTec:[],
+    preguntasCrip:[],
+    preguntasNode:[],
+    preguntasReact:[],
+    preguntasRandom:[],
     preguntaActiva: null,
     respuestaId:null,
     esPregunta:false,
@@ -9,7 +17,7 @@ const initialState = {
     esEditPregunta: false,
     esEditRespuesta:false,
     esEliminarPregunta:false,
-    EsEliminarRespuesta:false
+    EsEliminarRespuesta:false,
 }
 
 export const foroReducer = (state= initialState, action) => {
@@ -19,6 +27,19 @@ export const foroReducer = (state= initialState, action) => {
                 ...state,
                 preguntas: [...action.payload]
             }
+
+        case types.PreguntasCargadasDeportes:
+            return{
+                ...state,
+                preguntasDe:[...action.payload]
+            }
+
+        case types.PreguntasCargadasFotografia:
+            return{
+                ...state,
+                preguntasFoto:[...action.payload]
+            }
+            
         case types.modalAbiertoPreguntas:
             return {
                 ...state,
@@ -97,6 +118,12 @@ export const foroReducer = (state= initialState, action) => {
                 ...state,
                 esEliminarRespuesta:false
             }
+        case types.cargarTematicasStore:
+            return {
+                ...state,
+                tematicas: [...action.payload]
+            }
+        
         default:
             return state;
     }

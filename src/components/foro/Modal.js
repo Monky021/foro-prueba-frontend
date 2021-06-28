@@ -1,10 +1,12 @@
-import React from 'react'
+
 import Modal from 'react-modal';
+
 import { useForm } from '../../hooks/useForm';
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 import { cerrarModal } from '../../accions/uiActions';
 import { actualizarRespuesta, cerrarModelPregunta, eliminarRespuesta, hacerPreguntas, hacerRespuesta, iniciarActualizarPregunta, iniciarEliminarPregunta, limpiarEsEliminarRespuesta, limpiarIdRespuesta, limpiarModalEliminar, limpiarPreguntaActiva } from '../../accions/foroActions';
+//import { Tematica } from './Tematica';
 import './css.css';
 
 
@@ -30,18 +32,24 @@ export const ModalForo = () => {
     const dispatch = useDispatch();
 
     const { modalAbierto } = useSelector(state => state.ui);
-    const { esPregunta, preguntaActiva, esEliminarPregunta, respuestaId, esEliminarRespuesta } = useSelector(state => state.foro);
+    const {
+        esPregunta,
+        preguntaActiva,
+        esEliminarPregunta,
+        respuestaId,
+        esEliminarRespuesta,
+        tematicas
+    } = useSelector(state => state.foro);
     const { uid } = useSelector(state => state.auth);
 
 
     const [form, handleInputChange, reset] = useForm({
         pregunta: '',
-        respuesta: ''
+        respuesta: '',
+        tematica:1,
     });
 
-    const { pregunta, respuesta } = form;
-
-
+    const { pregunta, respuesta, tematica } = form;
 
     const handlerSubmit = (e) => {
         e.preventDefault();
@@ -50,10 +58,11 @@ export const ModalForo = () => {
                 return Swal.fire('Ups...', 'La pregunta es obligatoria', 'error')
 
             }
-            if (!!preguntaActiva ) {
+            if (!!preguntaActiva) {
                 dispatch(iniciarActualizarPregunta(preguntaActiva, pregunta))
             } else {
-                dispatch(hacerPreguntas(pregunta, uid));
+                console.log(tematica);
+                dispatch(hacerPreguntas(pregunta, uid, tematica));
                 reset();
                 dispatch(cerrarModal());
                 dispatch(cerrarModelPregunta());
@@ -67,8 +76,8 @@ export const ModalForo = () => {
             }
             if (!!respuestaId) {
                 dispatch(actualizarRespuesta(respuesta, respuestaId, preguntaActiva))
-            }else{
-                
+            } else {
+
 
                 dispatch(hacerRespuesta(respuesta, preguntaActiva));
             }
@@ -104,7 +113,7 @@ export const ModalForo = () => {
             dispatch(iniciarEliminarPregunta());
             dispatch(cerrarModal());
             dispatch(limpiarModalEliminar());
-            
+
         }
         if (esEliminarRespuesta) {
             dispatch(eliminarRespuesta(respuestaId));
@@ -154,22 +163,46 @@ export const ModalForo = () => {
                                 <hr />
                                 <form className="container" onSubmit={handlerSubmit}>
                                     {
-                                        esPregunta&&
-                                            (<div className="form-group">
-                                                <label>Pregunta</label>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Escribir toda la pregunta"
-                                                    name="pregunta"
-                                                    value={pregunta}
-                                                    onChange={handleInputChange}
-                                                    autoComplete="off"
-                                                    
-                                                />
+                                        esPregunta &&
+                                        (<div className="form-group">
+                                            <label>Pregunta</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                placeholder="Escribir toda la pregunta"
+                                                name="pregunta"
+                                                value={pregunta}
+                                                onChange={handleInputChange}
+                                                autoComplete="off"
 
-                                            </div>)
+                                            />
                                             
+
+                                            <label>Escojer tematica</label>
+            
+                                            <select 
+                                                className="form-control" 
+                                                onChange={handleInputChange}
+                                                value={tematica}
+                                                name='tematica'
+                                            >
+                                                {
+                                                    tematicas.map(tema=>(
+                                                        
+                                                        <option key={tema.id} value={tema.id}  >{tema.tematica}</option>
+
+                                                    ))
+                                                }
+                                                
+                                            </select>
+
+
+
+                                            
+
+
+                                        </div>)
+
                                     }
                                     {
                                         esPregunta
@@ -195,7 +228,7 @@ export const ModalForo = () => {
                                             type="submit"
                                             className="btn btn-outline-primary btn-block"
                                         >
-                                        Enviar
+                                            Enviar
                                         </button>
 
                                         {/* <button

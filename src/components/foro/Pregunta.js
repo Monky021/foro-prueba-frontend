@@ -32,6 +32,7 @@ export const Pregunta = ({id, pregunta = '', respuestas=[]}) => {
 
     return (
         <div className="container">
+            
             <div className="card" >
                 <div className="card-body">
                     <h5 className="card-title">{pregunta}</h5>

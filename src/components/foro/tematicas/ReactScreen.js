@@ -1,26 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { iniciarCargaPreguntas } from '../../accions/foroActions';
-import {Navbar} from '../ui/Navbar';
-import {Pregunta} from './Pregunta';
-import {ModalForo} from './Modal';
+import { iniciarCargaPreguntasReact } from '../../../accions/foroActions';
+import {Navbar} from '../../ui/Navbar';
+import {Pregunta} from '../Pregunta';
+import {ModalForo} from '../Modal';
 
-export const ForoScreen = () => {
+
+export const ReactScreen = () => {
 
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(iniciarCargaPreguntas());
+        dispatch(iniciarCargaPreguntasReact());
 
     }, [dispatch])
-
     const {preguntas} = useSelector(state => state.foro);
     
     return (
-        <>
-            <Navbar/>  
-            <div className="container">
-                <h1>Foro</h1>
-            </div>
+        <div>
+            <Navbar />
+            
+            <div className="container"> 
+
+            <h1>React</h1>
             {
                 preguntas.map(pregu => (
                     <Pregunta 
@@ -33,6 +34,8 @@ export const ForoScreen = () => {
             }
             
             <ModalForo />
-        </>
+            
+            </div>
+        </div>
     )
 }

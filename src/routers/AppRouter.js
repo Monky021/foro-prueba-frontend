@@ -7,10 +7,18 @@ import {
 } from "react-router-dom";
 import { startChecking } from '../accions/authActions';
 import { LoginScreen } from '../components/auth/LoginScreen';
-import { ForoScreen } from '../components/foro/ForoScreen';
+//import { ForoScreen } from '../components/foro/ForoScreen';
 import { PublicRoute } from './PublicRoute';
 import { PrivateRoute} from './PrivateRoute';
 
+import { ForoScreen } from '../components/foro/ForoScreen';
+import { CriptomonedasScreen } from '../components/foro/tematicas/CriptomonedasScreen';
+import { DeportesScreen } from '../components/foro/tematicas/DeportesScreen';
+import { FotografiaScreen } from '../components/foro/tematicas/FotografiaScreen';
+import { NodeScreen } from '../components/foro/tematicas/NodeScreen';
+import { ReactScreen } from '../components/foro/tematicas/ReactScreen';
+import { TecnologiaScreen } from '../components/foro/tematicas/TecnologiaScreen';
+import { RandomScreen } from '../components/foro/tematicas/RandomScreen';
 export const AppRouter = () => {
 
 
@@ -34,6 +42,7 @@ export const AppRouter = () => {
     
     return (
         <Router>
+            
             <div>
                 <Switch>
                     
@@ -48,6 +57,56 @@ export const AppRouter = () => {
                         path="/" 
                         component={ForoScreen}
                         isAuthenticated={!!uid}    
+
+                    />
+                    
+                    <PrivateRoute
+                        
+                        path="/Deportes"
+                        component={DeportesScreen}
+                        isAuthenticated={!!uid}
+
+                    />
+                    <PrivateRoute
+                        exact
+                        path="/Fotografia"
+                        component={FotografiaScreen}
+                        isAuthenticated={!!uid}
+
+                    />
+                    <PrivateRoute
+                        exact
+                        path="/Tecnología"
+                        component={TecnologiaScreen}
+                        isAuthenticated={!!uid}
+
+                    />
+                    <PrivateRoute
+                        exact
+                        path="/Criptomonedas"
+                        component={CriptomonedasScreen}
+                        isAuthenticated={!!uid}
+
+                    />
+                    <PrivateRoute
+                        exact
+                        path="/NodeJs"
+                        component={NodeScreen}
+                        isAuthenticated={!!uid}
+
+                    />
+                    <PrivateRoute
+                        exact
+                        path="/ReactJs"
+                        component={ReactScreen}
+                        isAuthenticated={!!uid}
+
+                    />
+                    <PrivateRoute
+                        exact
+                        path="/Random"
+                        component={RandomScreen}
+                        isAuthenticated={!!uid}
 
                     />
 
